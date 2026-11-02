@@ -20,10 +20,10 @@ These are an **earlier build**, captured by the project owner on Android. The se
 
 1. Choose a surface and CPU difficulty, then select **Play match**.
 2. During your serve, tap **Drive** or **Lift** to start the toss; tap again around the top of the toss to strike.
-3. Use the directional pad to move in all four directions. Tap a shot to prepare it while the ball approaches; assisted movement is enabled by default and can be turned off in settings.
+3. Drag the virtual joystick to move in all directions. Tap a shot to prepare it while the ball approaches; your player moves only when you provide input.
 4. Hit a legal return, rally and win a one-set match. Use **Lift** for a higher trajectory and **Lob** for a high, deep shot.
 
-On desktop, move with the arrow keys or WASD; press **J**, **K**, **L** (or **1**, **2**, **3**) for Drive, Lift and Lob. Tilt steering is optional and must be enabled in settings. Device and browser support varies.
+On desktop, move with the arrow keys or WASD; press **J**, **K**, **L** (or **1**, **2**, **3**) for Drive, Lift and Lob. Device and browser support varies.
 
 ## Run locally
 
@@ -45,7 +45,7 @@ The app registers a service worker. After an update, reload the page; if an olde
 npm test
 ```
 
-The Node test suite checks scoring, service-box logic, faults and lets, movement bounds, shot preparation, simulated rallies across four surfaces, and a simulated full match. It also exercises the view adapter with a mocked renderer. These tests **do not** establish that WebGL renders correctly, that sprites align, or that touch and motion sensors work on a physical phone.
+The Node test suite checks scoring, service-box logic, faults and lets, movement bounds, shot preparation, simulated rallies across four surfaces, and a simulated full match. It also exercises the view adapter with a mocked renderer. These tests **do not** establish that WebGL renders correctly, that sprites align, or that touch controls work on a physical phone.
 
 ## Architecture
 
@@ -65,7 +65,7 @@ The court and ball are rendered in 3D. Characters are photographic 2D sprite pla
 ## Known limitations
 
 - The current hosted test browser reports its GL renderer as disabled and cannot create a WebGL context; see [the investigation](docs/webgl-investigation.md). That does not prove WebGL is broken on Android devices.
-- Real-device validation is still required for serve alignment, animation, touch input, tilt, frame rate, sound, haptics and installability.
+- Real-device validation is still required for serve alignment, animation, touch input, frame rate, sound, haptics and installability.
 - Difficulty is not calibrated: idealized automated matches at higher levels can last excessively long.
 - Character poses are sprites, so movement, racket/ball contact and transitions are approximate. The country surface selector is a list rather than the world map in the original specification.
 - Tennis rules and ball flight are simplified and should not be treated as a complete tournament simulation. Contributions should include regression tests for rule changes and manual device validation for visuals.

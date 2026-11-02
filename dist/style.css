@@ -14,3 +14,7 @@
 .screen .landing-side p{color:#d5e7f4}.screen button:focus-visible,.screen select:focus-visible{outline-color:#bde6ff}
 .brand span,.brand i{color:#8bd2ff}
 @media(max-height:450px){.screen h1{font-size:clamp(40px,7.5vw,64px)}}
+
+/* Thumb joystick: one pointer remains captured while shot buttons use others. */
+#joystick{width:clamp(104px,16vh,136px);height:clamp(104px,16vh,136px);border-radius:50%;position:relative;pointer-events:auto;touch-action:none;user-select:none;background:rgba(8,31,46,.45);border:1px solid rgba(213,238,255,.45);box-shadow:inset 0 0 0 10px rgba(130,192,222,.06)}
+.joystick-ring{position:absolute;inset:19%;border:1px solid rgba(224,245,255,.2);border-radius:50%}#joystick-knob{position:absolute;left:50%;top:50%;width:42%;height:42%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(165,221,250,.72);border:2px solid rgba(241,252,255,.8);box-shadow:0 3px 12px rgba(0,16,33,.35);pointer-events:none}#joystick:active #joystick-knob{background:rgba(205,238,255,.95)}

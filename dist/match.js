@@ -50,7 +50,7 @@ export class TennisMatch{
   else{const aim=from===1?(this.aim||0):((Math.abs(this.human.x)>.8?-Math.sign(this.human.x):(this.random()>.5?1:-1))*(1.1+this.level*.13));target={x:clamp((this.random()-.5)*2.0+aim,-3.5,3.5),z:dir*(shot==='lob'?10.3:9.0)};peak=shot==='lob'?5.8:shot==='lift'?3.1:2.55;if(miss)target.x=(this.random()>.5?1:-1)*6;}
   this.gravity=shot==='lift'&&!isServe?11.2:9.81;this.vel=solveShot(this.ball,target,peak,this.gravity);this.phase='flight';this.clock=0;this.from=from;this.bounces=0;this.isServe=isServe;this.netTouched=false;this.reaction=from===1?LEVELS[this.level-1][0]:.04;this.cooldown=.22;this.targetClock=0;const a=from===1?this.human:this.cpu;a.pose=isServe?'serve':shot==='lob'?'lob':'forehand';a.poseTime=.32;if(from===1)this.intent=null;this.emit('hit',{from,shot,serve:isServe});}
  move(a,dx,dz,speed,dt){let l=Math.hypot(dx,dz);if(l>1){dx/=l;dz/=l;}let ax=18*dt;a.vx=advance(a.vx,dx*speed,ax);a.vz=advance(a.vz,dz*speed,ax);a.x=clamp(a.x+a.vx*dt,-6.7,6.7);a.z=clamp((a.z+a.vz*dt)*a.side,1.1,17)*a.side;}
- update(dt,input={x:0,z:0,assist:true}){
+ update(dt,input={x:0,z:0}){
   if(this.phase==='matchEnd')return;this.clock+=dt;for(const a of [this.human,this.cpu]){if(a.poseTime>0){a.poseTime-=dt;if(a.poseTime<=0)a.pose='idle';}}
   if(this.phase==='end'){if(this.clock>1.6)this.startPoint();return;}
   if(this.phase==='pauseFault'){if(this.clock>.9)this.startPoint(true);return;}
@@ -59,8 +59,8 @@ export class TennisMatch{
   if(this.phase!=='flight')return;
   this.reaction-=dt;this.cooldown-=dt;if(this.intent&&this.clock>this.intent.expires){this.intent=null;this.emit('hint',{text:'SHOT EXPIRED'});}
   this.targetClock-=dt;let receiver=this.from===1?this.cpu:this.human;let speed=receiver.side===1?4:LEVELS[this.level-1][1];
-  if(this.targetClock<=0){receiver.target=intercept(this.ball,this.vel,this.gravity,this.from,this.bounces,this.isServe,receiver,speed,this.surface);this.targetClock=.09;}
-  let hx=clamp(input.x||0,-1,1),hz=clamp(input.z||0,-1,1);if(receiver===this.human&&receiver.target&&input.assist!==false){if(Math.abs(hx)<.08)hx=clamp((receiver.target.x-receiver.x)*1.5,-1,1);if(Math.abs(hz)<.08)hz=clamp((receiver.target.z-receiver.z)*1.5,-1,1);}this.move(this.human,hx,hz,4,dt);
+  if(this.targetClock<=0){if(receiver===this.cpu)receiver.target=intercept(this.ball,this.vel,this.gravity,this.from,this.bounces,this.isServe,receiver,speed,this.surface);this.targetClock=.09;}
+  let hx=clamp(input.x||0,-1,1),hz=clamp(input.z||0,-1,1);if(hx===0)this.human.vx=0;if(hz===0)this.human.vz=0;this.move(this.human,hx,hz,4,dt);
   let cx=0,cz=0;if(receiver===this.cpu&&receiver.target&&this.reaction<=0){cx=clamp((receiver.target.x-receiver.x)*1.8,-1,1);cz=clamp((receiver.target.z-receiver.z)*1.8,-1,1);}this.move(this.cpu,cx,cz,LEVELS[this.level-1][1],dt);
   const old={...this.ball};this.vel.y-=this.gravity*dt;this.ball.x+=this.vel.x*dt;this.ball.y+=this.vel.y*dt;this.ball.z+=this.vel.z*dt;
   if(old.z*this.ball.z<=0){let f=old.z/(old.z-this.ball.z),height=old.y+(this.ball.y-old.y)*f;if(height<COURT.net+COURT.ball){if(this.isServe&&height>COURT.net-.10){this.netTouched=true;this.vel.z*=.65;this.vel.y*=.65;this.emit('netClip');}else{if(this.isServe)this.fault();else this.point(-this.from,'NET');return;}}}
