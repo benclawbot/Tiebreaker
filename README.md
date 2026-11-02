@@ -23,7 +23,7 @@ These are an **earlier build**, captured by the project owner on Android. The se
 3. Drag the virtual joystick to move in all directions. Tap a shot to prepare it, then use the joystick to aim: left/right selects direction and up/down adjusts depth. The marker shows the target; your player moves only when you provide input.
 4. Hit a legal return, rally and win a one-set match. Use **Lift** for a higher trajectory and **Lob** for a high, deep shot.
 
-On desktop, move with the arrow keys or WASD; press **J**, **K**, **L** (or **1**, **2**, **3**) for Drive, Lift and Lob. Device and browser support varies.
+On desktop, use the **arrow keys** to move and aim. Select **D** for Drive, **L** for Lift or **O** for Lob, then press **Space** to hit. During a serve, press Space once to toss and again to strike; serves use Drive or Lift. Device and browser support varies.
 
 ## Run locally
 
