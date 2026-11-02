@@ -60,7 +60,7 @@ tests/                    Node simulation and adapter tests
 docs/images/              README artwork and prototype screenshots
 ```
 
-The court and ball are rendered in 3D. Characters are photographic 2D sprite planes with pose transitions; they are not rigged 3D characters. The simulation uses fixed time steps. Surface parameters and the CPU difficulty settings are starting points that require device playtesting and tuning.
+Each court uses a supplied stadium image with a calibrated 3D camera. The ball is rendered in 3D, while characters use photographic 2D sprite planes with blended directional poses; they are not rigged 3D characters. The indoor court uses the supplied carpet image with the existing indoor-hard physics settings. The simulation uses fixed time steps. Surface parameters and the CPU difficulty settings are starting points that require device playtesting and tuning.
 
 ## Known limitations
 

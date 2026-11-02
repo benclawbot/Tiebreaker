@@ -18,3 +18,8 @@
 /* Thumb joystick: one pointer remains captured while shot buttons use others. */
 #joystick{width:clamp(104px,16vh,136px);height:clamp(104px,16vh,136px);border-radius:50%;position:relative;pointer-events:auto;touch-action:none;user-select:none;background:rgba(8,31,46,.45);border:1px solid rgba(213,238,255,.45);box-shadow:inset 0 0 0 10px rgba(130,192,222,.06)}
 .joystick-ring{position:absolute;inset:19%;border:1px solid rgba(224,245,255,.2);border-radius:50%}#joystick-knob{position:absolute;left:50%;top:50%;width:42%;height:42%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(165,221,250,.72);border:2px solid rgba(241,252,255,.8);box-shadow:0 3px 12px rgba(0,16,33,.35);pointer-events:none}#joystick:active #joystick-knob{background:rgba(205,238,255,.95)}
+
+#courtBackdrop{position:fixed;inset:0;background:#163c4c center center / cover no-repeat;pointer-events:none} canvas{background:transparent}
+
+/* Preserve enough of the photographed court for both players on wide screens. */
+#courtBackdrop,canvas{position:fixed;left:50%;top:0;right:auto;bottom:auto;transform:translateX(-50%);width:min(100vw,235vh);height:100vh}
