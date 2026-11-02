@@ -20,3 +20,14 @@ export function visibleHumanBounds(c,crop,playerZ){
  const half=Math.min(center.x-crop.x,crop.x+crop.width-center.x)-25;
  return {maxZ:Math.max(13,Math.min(17,lo)),maxX:Math.max(4.2,Math.min(6.7,half/(unit.x-center.x)))};
 }
+
+// Scoreboard rectangles in the 762 × 506 image coordinate system.
+export const SCORE_PANELS={hard:{x:320,y:40,width:122,height:56},grass:{x:307,y:91,width:154,height:52},clay:{x:292,y:129,width:178,height:48},indoor:{x:286,y:139,width:190,height:45}};
+export function scorePlacement(surface,viewportWidth,viewportHeight){
+ const stage=Math.min(viewportWidth,viewportHeight*2.35),crop=venueCrop(stage,viewportHeight),p=SCORE_PANELS[surface];
+ if(!p)return {mode:'floating'};
+ const scale=stage/crop.width,left=(viewportWidth-stage)/2+(p.x-crop.x)*scale,top=(p.y-crop.y)*scale,width=p.width*scale,height=p.height*scale;
+ // A cropped or tiny in-image board is replaced by a readable top-centre score.
+ if(top<4||top+height>viewportHeight-4||left<4||left+width>viewportWidth-4||width<112||height<42)return {mode:'floating'};
+ return {mode:'panel',left,top,width,height};
+}

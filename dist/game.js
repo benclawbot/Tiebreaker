@@ -1,8 +1,8 @@
 import * as THREE from './three.module.js';
-import {TennisMatch,scoreLabel,humanShotTarget} from './match.js?v=14';
-import {bindJoystick} from './joystick.js?v=14';
-import {createAnimator,advanceAnimator} from './animation.js?v=14';
-import {VENUES,venueCrop,visibleHumanBounds} from './venue.js?v=14';
+import {TennisMatch,scoreLabel,humanShotTarget} from './match.js?v=15';
+import {bindJoystick} from './joystick.js?v=15';
+import {createAnimator,advanceAnimator} from './animation.js?v=15';
+import {VENUES,venueCrop,visibleHumanBounds,scorePlacement} from './venue.js?v=15';
 const $=s=>document.querySelector(s), canvas=$('#court');
 let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true})}catch(error){document.querySelector('.tagline').textContent='This browser cannot start WebGL. Please open Tie Breaker in Chrome on your phone.';document.querySelector('#start').disabled=true;throw error}renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(Math.min(innerWidth,innerHeight*2.35),innerHeight,false);renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
 const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x97b7ae,45,110);const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,200);camera.position.set(0,9,28);camera.lookAt(0,0.5,-1);
@@ -19,7 +19,8 @@ for(let i=0;i<4;i++){let stand=new THREE.Mesh(new THREE.BoxGeometry(30,.7,2),mat
 // The supplied venue images already contain the court, net and stands.
 for(const object of scene.children){if(object.isMesh||object.isGroup)object.visible=false}
 const backdrop=$('#courtBackdrop');const stageWidth=()=>Math.min(innerWidth,innerHeight*2.35);let textureLoader=new THREE.TextureLoader();
-function setVenue(){const name=$('#surface').value,settings=VENUES[name],crop=venueCrop(stageWidth(),innerHeight);backdrop.style.backgroundImage=`url("assets/venue-${name}.jpg?v=14")`;backdrop.style.backgroundPosition=crop.position;camera.position.set(0,settings.height,settings.z);camera.rotation.set(-settings.pitch*Math.PI/180,0,0);camera.fov=settings.fov;camera.setViewOffset(762,506,crop.x,crop.y,crop.width,crop.height);camera.updateProjectionMatrix()}
+function setVenue(){const name=$('#surface').value,settings=VENUES[name],crop=venueCrop(stageWidth(),innerHeight);backdrop.style.backgroundImage=`url("assets/venue-${name}.jpg?v=15")`;backdrop.style.backgroundPosition=crop.position;camera.position.set(0,settings.height,settings.z);camera.rotation.set(-settings.pitch*Math.PI/180,0,0);camera.fov=settings.fov;camera.setViewOffset(762,506,crop.x,crop.y,crop.width,crop.height);camera.updateProjectionMatrix();positionScore(name)}
+function positionScore(name){const score=$('.score'),p=scorePlacement(name,innerWidth,innerHeight);score.className='score'+(p.mode==='floating'?' floating':'');for(const key of ['left','top','width','height'])score.style[key]=p.mode==='panel'?p[key]+'px':''}
 function makeActor(url){let tex=textureLoader.load(url);tex.colorSpace=THREE.SRGBColorSpace;let m=new THREE.Mesh(new THREE.PlaneGeometry(1.85*0.75,1.85),new THREE.MeshBasicMaterial({map:tex,transparent:true,alphaTest:.18,side:THREE.DoubleSide}));m.position.y=.925;scene.add(m);return m}const player=makeActor('assets/player.png'),cpu=makeActor('assets/cpu.png');const playerBlend=makeActor('assets/player.png'),cpuBlend=makeActor('assets/cpu.png');for(const layer of [player,cpu,playerBlend,cpuBlend])layer.material.depthWrite=false;playerBlend.renderOrder=1;cpuBlend.renderOrder=1;playerBlend.visible=false;cpuBlend.visible=false;const playerAnimator=createAnimator(),cpuAnimator=createAnimator();
 const poseTextures={};for(const name of ['player_forehand','player_backhand','player_hold_left','player_toss_left','player_serve_left','player_lob','player_serve','cpu_forehand','cpu_backhand','cpu_hold_left','cpu_lob','cpu_serve','player_run_left','player_run_right','cpu_run_left','cpu_run_right','player_run_forward','player_run_backward','cpu_run_forward','cpu_run_backward','player_hold','player_toss','cpu_hold','cpu_toss']){let t=textureLoader.load(`assets/${name}.png`);t.colorSpace=THREE.SRGBColorSpace;poseTextures[name]=t}const idleTextures={player:player.material.map,cpu:cpu.material.map};
 const targetMarker=new THREE.Mesh(new THREE.RingGeometry(.22,.30,32),new THREE.MeshBasicMaterial({color:0x92d9ff,transparent:true,opacity:.9,side:THREE.DoubleSide,depthWrite:false}));targetMarker.rotation.x=-Math.PI/2;targetMarker.position.y=.035;targetMarker.visible=false;scene.add(targetMarker);

@@ -23,3 +23,9 @@
 
 /* Preserve enough of the photographed court for both players on wide screens. */
 #courtBackdrop,canvas{position:fixed;left:50%;top:0;right:auto;bottom:auto;transform:translateX(-50%);width:min(100vw,235vh);height:100vh}
+
+/* Use the stadium screen when visible, with a readable centred fallback. */
+#hud>.score{position:fixed;z-index:2;display:flex;flex-direction:column;justify-content:center;border:0;border-radius:2px;overflow:hidden;box-sizing:border-box;padding:3px 7px;pointer-events:none;background:rgba(1,20,39,.68);color:#fff}
+#hud>.score>div{display:grid;grid-template-columns:1fr 2ch 3ch;align-items:center;gap:4px;padding:2px 3px;line-height:1.05}
+#hud>.score>div+div{border-left:0;border-top:1px solid rgba(255,255,255,.22)}
+#hud>.score small{font-size:clamp(9px,1vw,16px);letter-spacing:.08em;white-space:nowrap}#hud>.score b{font-size:clamp(10px,1vw,17px);text-align:right}#hud>.score strong{font-size:clamp(13px,1.5vw,25px);min-width:0;text-align:right}#hud>.score.floating{left:50%;top:max(10px,env(safe-area-inset-top));transform:translateX(-50%);width:140px;height:56px;border:1px solid rgba(181,216,235,.45);background:rgba(5,30,47,.9)}
