@@ -1,7 +1,7 @@
 import * as THREE from './three.module.js';
 import {TennisMatch,scoreLabel} from './match.js';
 const $=s=>document.querySelector(s), canvas=$('#court');
-let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true})}catch(error){document.querySelector('.tagline').textContent='This browser cannot start WebGL. Please open Baseline in Chrome on your phone.';document.querySelector('#start').disabled=true;throw error}renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.setClearColor(0x9ec6c6);renderer.outputColorSpace=THREE.SRGBColorSpace;
+let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true})}catch(error){document.querySelector('.tagline').textContent='This browser cannot start WebGL. Please open Tie Breaker in Chrome on your phone.';document.querySelector('#start').disabled=true;throw error}renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.setClearColor(0x9ec6c6);renderer.outputColorSpace=THREE.SRGBColorSpace;
 const scene=new THREE.Scene();scene.fog=new THREE.Fog(0x97b7ae,45,110);const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,200);camera.position.set(0,9,28);camera.lookAt(0,0.5,-1);
 scene.add(new THREE.HemisphereLight(0xddeeff,0x73725d,2));const sun=new THREE.DirectionalLight(0xfff3d4,2);sun.position.set(-8,20,10);scene.add(sun);
 const materials={hard:{color:0x3885a8,rest:.72,loss:.10,pace:1},indoor:{color:0x526e7b,rest:.74,loss:.08,pace:1.05},clay:{color:0xb85937,rest:.80,loss:.25,pace:.85},grass:{color:0x588148,rest:.55,loss:.15,pace:1.1}};
