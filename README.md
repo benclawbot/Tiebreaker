@@ -20,7 +20,7 @@ These are an **earlier build**, captured by the project owner on Android. The se
 
 1. Choose a surface and CPU difficulty, then select **Play match**.
 2. During your serve, tap **Drive** or **Lift** to start the toss; tap again around the top of the toss to strike.
-3. Drag the virtual joystick to move in all directions. Tap a shot to prepare it while the ball approaches; your player moves only when you provide input.
+3. Drag the virtual joystick to move in all directions. Tap a shot to prepare it, then use the joystick to aim: left/right selects direction and up/down adjusts depth. The marker shows the target; your player moves only when you provide input.
 4. Hit a legal return, rally and win a one-set match. Use **Lift** for a higher trajectory and **Lob** for a high, deep shot.
 
 On desktop, move with the arrow keys or WASD; press **J**, **K**, **L** (or **1**, **2**, **3**) for Drive, Lift and Lob. Device and browser support varies.

@@ -1,4 +1,4 @@
-const CACHE='tie-breaker-v7';
+const CACHE='tie-breaker-v8';
 const assets=['./','./index.html','./style.css','./game.js','./match.js','./joystick.js','./three.module.js','./three.core.js','./manifest.webmanifest','./icon-192.png','./icon-512.png',...['player.png','cpu.png','hard.jpg','indoor.jpg','clay.jpg','grass.jpg','player_forehand.png','player_lob.png','player_serve.png','cpu_forehand.png','cpu_lob.png','cpu_serve.png','player_run_left.png','player_run_right.png','cpu_run_left.png','cpu_run_right.png','player_hold.png','player_toss.png','cpu_hold.png','cpu_toss.png'].map(n=>'./assets/'+n)];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(assets)))});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
