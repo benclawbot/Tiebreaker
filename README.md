@@ -69,7 +69,6 @@ Each court uses a supplied stadium image with a calibrated 3D camera. Both playe
 - Player movement and strokes use blended photographic sprites; animation transitions and racket-to-ball contact are approximate. The experimental 3D motion-capture renderer is retained separately and is not used in play.
 - The indoor court uses a carpet image with indoor-hard physics. Surface behavior and CPU difficulty still need tuning; automated matches at higher difficulties can last excessively long.
 - Tennis rules and ball flight are simplified. The location selector is a list rather than an interactive map.
-- Physical-device testing is still needed for touch controls, animation, performance, sound, haptics and installation. Browser and device support may vary.
 
 ## Third-party notices
 
