@@ -60,11 +60,11 @@ tests/                    Node simulation and adapter tests
 docs/images/              README artwork and prototype screenshots
 ```
 
-Each court uses a supplied stadium image with a calibrated 3D camera. Both players use rigged 3D models with tennis strokes retargeted from motion-capture recordings; photographic sprites remain as a fallback if the models cannot load. Running uses procedural steps because the recordings do not contain locomotion clips. Racket alignment is approximate and needs device playtesting. The indoor court uses the supplied carpet image with the existing indoor-hard physics settings. The simulation uses fixed time steps. Surface parameters and the CPU difficulty settings are starting points that require device playtesting and tuning.
+Each court uses a supplied stadium image with a calibrated 3D camera. Both players use photographic sprites with blended directional and stroke poses. The experimental rigged 3D renderer and motion-capture data remain in the repository but are not loaded during play. The recordings contain strokes, not running cycles or racket and ball trajectories. Sprite transitions and racket-to-ball alignment remain approximate. The indoor court uses the supplied carpet image with the existing indoor-hard physics settings. The simulation uses fixed time steps. Surface parameters and the CPU difficulty settings are starting points that require device playtesting and tuning.
 
 ## Known limitations
 
-- The current hosted test browser reports its GL renderer as disabled and cannot create a WebGL context; see [the investigation](docs/webgl-investigation.md). That does not prove WebGL is broken on Android devices.
+- A managed preview browser could not create a WebGL context on 2026-11-02; see [the investigation](docs/webgl-investigation.md). Browser and device support still needs testing.
 - Real-device validation is still required for serve alignment, animation, touch input, frame rate, sound, haptics and installability.
 - Difficulty is not calibrated: idealized automated matches at higher levels can last excessively long.
 - Movement, racket/ball contact and animation transitions are approximate and need visual testing on a real device. The country surface selector is a list rather than the world map in the original specification.
