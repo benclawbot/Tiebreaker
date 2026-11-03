@@ -17,3 +17,11 @@ export function advanceAnimator(state,actor,dt){
  const lean=running?Math.max(-.08,Math.min(.08,-actor.vx*.013))+Math.sin(state.phase)*.018*motion:0;
  return {from:state.from,to:state.to,blend:state.blend,bob,lean,running,direction:dir};
 }
+
+// Sequence is preparation, toss, trophy, contact, follow-through and recovery.
+export function leftServeFrame(phase,clock,poseTime){
+ if(phase==='hold')return 0;
+ if(phase==='toss')return Math.min(2,Math.max(0,clock/.66*2));
+ if(phase==='flight'&&poseTime>0)return 3+Math.min(2,Math.max(0,(.32-poseTime)/.32*2));
+ return null;
+}
