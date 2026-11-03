@@ -10,11 +10,13 @@
 
 ## Screenshots
 
-| Match view | Left-side serve |
-| --- | --- |
-| ![Match view with the stadium court, scoreboard and controls](docs/images/match-court.jpg) | ![Close-up of the player preparing a left-side serve](docs/images/left-serve.jpg) |
+Current gameplay on each surface:
 
-These are the latest gameplay captures supplied by the project owner. They were taken **before the latest left-side serve animation update**, so the serve pose shown here does not represent that update. A fresh gameplay capture of the current build is still needed.
+| Outdoor hard | Indoor hard |
+| --- | --- |
+| ![Match on the outdoor hard court](docs/images/surface-outdoor-hard.jpg) | ![Match on the indoor hard court](docs/images/surface-indoor-hard.jpg) |
+| **Clay** | **Grass** |
+| ![Match on the clay court](docs/images/surface-clay.jpg) | ![Match on the grass court](docs/images/surface-grass.jpg) |
 
 ## Play
 
@@ -64,11 +66,10 @@ Each court uses a supplied stadium image with a calibrated 3D camera. Both playe
 
 ## Known limitations
 
-- A managed preview browser could not create a WebGL context on 2026-11-02; see [the investigation](docs/webgl-investigation.md). Browser and device support still needs testing.
-- Real-device validation is still required for serve alignment, animation, touch input, frame rate, sound, haptics and installability.
-- Difficulty is not calibrated: idealized automated matches at higher levels can last excessively long.
-- Movement, racket/ball contact and animation transitions are approximate and need visual testing on a real device. The country surface selector is a list rather than the world map in the original specification.
-- Tennis rules and ball flight are simplified and should not be treated as a complete tournament simulation. Contributions should include regression tests for rule changes and manual device validation for visuals.
+- Player movement and strokes use blended photographic sprites; animation transitions and racket-to-ball contact are approximate. The experimental 3D motion-capture renderer is retained separately and is not used in play.
+- The indoor court uses a carpet image with indoor-hard physics. Surface behavior and CPU difficulty still need tuning; automated matches at higher difficulties can last excessively long.
+- Tennis rules and ball flight are simplified. The location selector is a list rather than an interactive map.
+- Physical-device testing is still needed for touch controls, animation, performance, sound, haptics and installation. Browser and device support may vary.
 
 ## Third-party notices
 
