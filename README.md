@@ -60,16 +60,16 @@ tests/                    Node simulation and adapter tests
 docs/images/              README artwork and prototype screenshots
 ```
 
-Each court uses a supplied stadium image with a calibrated 3D camera. The ball is rendered in 3D, while characters use photographic 2D sprite planes with blended directional poses; they are not rigged 3D characters. The indoor court uses the supplied carpet image with the existing indoor-hard physics settings. The simulation uses fixed time steps. Surface parameters and the CPU difficulty settings are starting points that require device playtesting and tuning.
+Each court uses a supplied stadium image with a calibrated 3D camera. Both players use rigged 3D models with tennis strokes retargeted from motion-capture recordings; photographic sprites remain as a fallback if the models cannot load. Running uses procedural steps because the recordings do not contain locomotion clips. Racket alignment is approximate and needs device playtesting. The indoor court uses the supplied carpet image with the existing indoor-hard physics settings. The simulation uses fixed time steps. Surface parameters and the CPU difficulty settings are starting points that require device playtesting and tuning.
 
 ## Known limitations
 
 - The current hosted test browser reports its GL renderer as disabled and cannot create a WebGL context; see [the investigation](docs/webgl-investigation.md). That does not prove WebGL is broken on Android devices.
 - Real-device validation is still required for serve alignment, animation, touch input, frame rate, sound, haptics and installability.
 - Difficulty is not calibrated: idealized automated matches at higher levels can last excessively long.
-- Character poses are sprites, so movement, racket/ball contact and transitions are approximate. The country surface selector is a list rather than the world map in the original specification.
+- Movement, racket/ball contact and animation transitions are approximate and need visual testing on a real device. The country surface selector is a list rather than the world map in the original specification.
 - Tennis rules and ball flight are simplified and should not be treated as a complete tournament simulation. Contributions should include regression tests for rule changes and manual device validation for visuals.
 
 ## Third-party notices
 
-The bundled [three.js](https://threejs.org/) files are licensed under the MIT license; see [THIRD_PARTY_THREE_LICENSE.txt](THIRD_PARTY_THREE_LICENSE.txt). The README hero and several in-game assets were generated for this project. No project-wide license is specified yet.
+The bundled [three.js](https://threejs.org/) files are licensed under the MIT license; see [THIRD_PARTY_THREE_LICENSE.txt](THIRD_PARTY_THREE_LICENSE.txt). The rigged athlete model is licensed under MIT, and the adapted tennis motion recordings under CC BY-SA 3.0; see [model license](dist/assets/mocap/MODEL-LICENSE.txt) and [motion attribution](dist/assets/mocap/ATTRIBUTION.md). The README hero and several in-game assets were generated for this project. No project-wide license is specified yet.
