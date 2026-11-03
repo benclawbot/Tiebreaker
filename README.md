@@ -10,11 +10,11 @@
 
 ## Screenshots
 
-| Prototype match | Serve detail |
+| Match view | Left-side serve |
 | --- | --- |
-| ![Earlier prototype match view showing the scoreboard, court and shot controls](docs/images/prototype-serve.png) | ![Close-up from the same earlier prototype screenshot showing the ball and serve timing control](docs/images/prototype-serve-detail.png) |
+| ![Match view with the stadium court, scoreboard and controls](docs/images/match-court.jpg) | ![Close-up of the player preparing a left-side serve](docs/images/left-serve.jpg) |
 
-These are an **earlier build**, captured by the project owner on Android. The second image is a crop of the first, not a separate gameplay capture. Controls and visuals have changed since this screenshot; up-to-date device screenshots are still needed.
+These are the latest gameplay captures supplied by the project owner. They were taken **before the latest left-side serve animation update**, so the serve pose shown here does not represent that update. A fresh gameplay capture of the current build is still needed.
 
 ## Play
 
